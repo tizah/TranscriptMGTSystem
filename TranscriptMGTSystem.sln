@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranscriptMGTSystem", "TranscriptMGTSystem\TranscriptMGTSystem.csproj", "{5D2DDAE4-0931-4B1E-8EB1-BE7125DC4971}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranscriptModels", "TranscriptModels\TranscriptModels.csproj", "{37DF8F35-669C-4324-9AEE-EF63F8EF47EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5D2DDAE4-0931-4B1E-8EB1-BE7125DC4971}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D2DDAE4-0931-4B1E-8EB1-BE7125DC4971}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D2DDAE4-0931-4B1E-8EB1-BE7125DC4971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37DF8F35-669C-4324-9AEE-EF63F8EF47EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37DF8F35-669C-4324-9AEE-EF63F8EF47EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37DF8F35-669C-4324-9AEE-EF63F8EF47EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37DF8F35-669C-4324-9AEE-EF63F8EF47EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

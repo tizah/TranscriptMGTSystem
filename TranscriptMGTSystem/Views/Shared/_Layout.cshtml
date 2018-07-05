@@ -4,41 +4,290 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/assets/images/icons/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/assets/images/icons/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/assets/images/icons/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/Content/assets/images/icons/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="~/Content/assets/images/icons/favicon.png">
+
+
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/bootstrap/css/bootstrap.css">
+    <link href="~/Content/datatables.min.css" rel="stylesheet" />
+
+    <!-- HELPERS -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/backgrounds.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/boilerplate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/border-radius.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/grid.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/page-transitions.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/spacing.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/typography.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/utils.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/colors.css">
+
+    <!-- ELEMENTS -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/badges.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/buttons.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/content-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/dashboard-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/forms.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/images.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/info-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/invoice.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/loading-indicators.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/menus.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/panel-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/response-messages.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/responsive-tables.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/ribbon.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/social-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/tables.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/tile-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/elements/timeline.css">
+
+
+
+    <!-- ICONS -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/icons/fontawesome/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/icons/linecons/linecons.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/icons/spinnericon/spinnericon.css">
+
+
+    <!-- WIDGETS -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/accordion-ui/accordion.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/calendar/calendar.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/carousel/carousel.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/charts/justgage/justgage.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/charts/morris/morris.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/charts/piegage/piegage.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/charts/xcharts/xcharts.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/chosen/chosen.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/colorpicker/colorpicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/datatable/datatable.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/datepicker/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/datepicker-ui/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/dialog/dialog.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/dropdown/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/dropzone/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/file-input/fileinput.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/input-switch/inputswitch.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/input-switch/inputswitch-alt.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/ionrangeslider/ionrangeslider.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/jcrop/jcrop.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/jgrowl-notifications/jgrowl.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/loading-bar/loadingbar.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/maps/vector-maps/vectormaps.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/markdown/markdown.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/modal/modal.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/multi-select/multiselect.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/multi-upload/fileupload.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/nestable/nestable.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/noty-notifications/noty.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/popover/popover.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/pretty-photo/prettyphoto.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/progressbar/progressbar.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/range-slider/rangeslider.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/slidebars/slidebars.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/slider-ui/slider.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/summernote-wysiwyg/summernote-wysiwyg.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/tabs-ui/tabs.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/theme-switcher/themeswitcher.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/timepicker/timepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/tocify/tocify.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/tooltip/tooltip.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/touchspin/touchspin.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/uniform/uniform.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/wizard/wizard.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/widgets/xeditable/xeditable.css">
+
+    <!-- SNIPPETS -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/snippets/chat.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/snippets/files-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/snippets/login-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/snippets/notification-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/snippets/progress-box.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/snippets/todo.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/snippets/user-profile.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/snippets/mobile-navigation.css">
+
+    <!-- APPLICATIONS -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/applications/mailbox.css">
+
+    <!-- Admin theme -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/themes/admin/layout.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/themes/admin/color-schemes/default.css">
+
+    <!-- Components theme -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/themes/components/default.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/themes/components/border-radius.css">
+
+    <!-- Admin responsive -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/responsive-elements.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/admin-responsive.css">
+
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+
+
+    <div id="page-wrapper">
+        <div id="page-header" class="bg-black-opacity">
+            @Html.ActionLink("Transcript System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
+
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @* //////////////////// *@
+    <div id="page-sidebar">
+        <div class="scroll-sidebar">
+
+
+            <ul id="sidebar-menu">
+                <li class="header"><span>Overview</span></li>
+                <li>
+                    <a href="@Url.Action("Create","Students")" title="Upload Student Record">
+                        <i class="glyph-icon icon-linecons-tv"></i>
+                        <span>Upload Students Record</span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li class="no-menu">
+                    <a href="@Url.Action("Create","Courses")" title="Upload Courses">
+                        <i class="glyph-icon icon-linecons-beaker"></i>
+                        <span>Upload Coursesx</span>
+                        <span class="bs-label label-danger">
+                            NEW
+                        </span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li class="header"><span>CGPA</span></li>
+                <li>
+                    <a href="@Url.Action("Create","Results")" title="Elements">
+                        <i class="glyph-icon icon-linecons-diamond"></i>
+                        <span>Upload Results</span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="@Url.Action("Index","Students")" title="Elements">
+                        <i class="glyph-icon icon-linecons-diamond"></i>
+                        <span>View Transcripts</span>
+                    </a>
+
+            </ul>
+        </div>
+    </div>
+    @* ////////////////////// *@
+    <div id="page-content-wrapper">
+        <div id="page-content">
+
+            <div class="container">
+
+
+                @RenderBody()
+                <div>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Transcript System</p>
+    </footer>
+
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/datatables.min.js"></script>
+
+
+
+    <!-- WIDGETS -->
+
+    <script type="text/javascript" src="~/Contentassets/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Bootstrap Dropdown -->
+    <!-- <script type="text/javascript" src="~/Contentassets/widgets/dropdown/dropdown.js"></script> -->
+    <!-- Bootstrap Tooltip -->
+    <!-- <script type="text/javascript" src="~/Contentassets/widgets/tooltip/tooltip.js"></script> -->
+    <!-- Bootstrap Popover -->
+    <!-- <script type="text/javascript" src="~/Contentassets/widgets/popover/popover.js"></script> -->
+    <!-- Bootstrap Progress Bar -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/progressbar/progressbar.js"></script>
+
+    <!-- Bootstrap Buttons -->
+    <!-- <script type="text/javascript" src="~/Contentassets/widgets/button/button.js"></script> -->
+    <!-- Bootstrap Collapse -->
+    <!-- <script type="text/javascript" src="~/Contentassets/widgets/collapse/collapse.js"></script> -->
+    <!-- Superclick -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/superclick/superclick.js"></script>
+
+    <!-- Input switch alternate -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/input-switch/inputswitch-alt.js"></script>
+
+    <!-- Slim scroll -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/slimscroll/slimscroll.js"></script>
+
+    <!-- Slidebars -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/slidebars/slidebars.js"></script>
+    <script type="text/javascript" src="~/Contentassets/widgets/slidebars/slidebars-demo.js"></script>
+
+    <!-- PieGage -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/charts/piegage/piegage.js"></script>
+    <script type="text/javascript" src="~/Contentassets/widgets/charts/piegage/piegage-demo.js"></script>
+
+    <!-- Screenfull -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/screenfull/screenfull.js"></script>
+
+    <!-- Content box -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/content-box/contentbox.js"></script>
+
+    <!-- Overlay -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/overlay/overlay.js"></script>
+
+    <!-- Widgets init for demo -->
+
+    <script type="text/javascript" src="~/Contentassets/js-init/widgets-init.js"></script>
+
+    <!-- Theme layout -->
+
+    <script type="text/javascript" src="~/Contentassets/themes/admin/layout.js"></script>
+
+    <!-- Theme switcher -->
+
+    <script type="text/javascript" src="~/Contentassets/widgets/theme-switcher/themeswitcher.js"></script>
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

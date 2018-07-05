@@ -1,0 +1,117 @@
+﻿@model IEnumerable<TranscriptModels.Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.CourseCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.MatricNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Session)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GradeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalUnitTaken)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalUnitPassed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotaGradePoints)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GradePointAverage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitOfCompulsoryCourse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CumulativeUnitTakenSoFar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CumulativeUnitPassedSoFar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CummulativeGradePoint)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CummulativeGradePointAverage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OutstandingCourses)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.MatricNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Session)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GradeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalUnitTaken)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalUnitPassed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotaGradePoints)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GradePointAverage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitOfCompulsoryCourse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CumulativeUnitTakenSoFar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CumulativeUnitPassedSoFar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CummulativeGradePoint)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CummulativeGradePointAverage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OutstandingCourses)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ResultId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ResultId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ResultId })
+        </td>
+    </tr>
+}
+
+</table>

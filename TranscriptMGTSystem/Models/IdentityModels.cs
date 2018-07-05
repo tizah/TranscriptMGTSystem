@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using TranscriptModels;
 
 namespace TranscriptMGTSystem.Models
 {
@@ -29,5 +30,10 @@ namespace TranscriptMGTSystem.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Result> Results { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<CourseGrade> CourseGrades { get; set; }
     }
 }

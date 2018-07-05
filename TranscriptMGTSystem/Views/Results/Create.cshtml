@@ -1,0 +1,23 @@
+﻿@model TranscriptModels.Result
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("UploadStudentGrade", "Results", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Raw(ViewBag.Error)    
+    <span>Excel File </span> <input type="file" name="excelfile" />
+    <br />
+    <input type="submit" value="Upload" class="btn btn-primary" />
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

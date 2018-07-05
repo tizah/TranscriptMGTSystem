@@ -1,0 +1,127 @@
+﻿@*@model IEnumerable<TranscriptModels.Student>*@
+@model  TranscriptMGTSystem.ViewModels.StudentListViewModel
+@{
+                ViewBag.Title = "Index";
+}
+
+<h2>List of Result</h2>
+
+
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table id="Jdatatable" class="table table-responsive table table-striped table-bordered table-hover dataTables-example">
+            <thead>
+                <tr>
+                    <th>View Transcript</th>
+                    <th> Matric No</th>
+
+                    <th>Name </th>
+                    <th> Email</th>
+
+                    <th> DeptName</th>
+
+                    <th>FacultyName</th>
+
+                    <th>YearOfAttendance</th>
+                    <th> Gender</th>
+                    <th> FirstName</th>
+
+                    <th>LastName</th>
+                    <th> YearOfAward</th>
+
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<div class="col-md-4 mb-1">
+    <div class="card contact-card with-padding">
+        <div class="card-body" id="mydetailBody">
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+        // var search = "@ViewBag.search";
+        window.oTable = $("#Jdatatable").DataTable({
+            "processing": true, // for show progress bar while loading
+            "serverSide": true, // if it is true the preocess is done on server side
+            "filter": true, // disables search box
+            "info": true,
+
+            "stateSave": true,
+            "orderMulti": false, // disable multiple column loading at once
+            "ajax": {
+                //"url": "/Students/GetIndex?search=" + "@ViewBag.search",
+                "url": "/Students/GetIndex",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                {
+                    "data": "StudentId",
+                    "autoWidth": true,
+                    "render": function (data) {
+                        return '<a href="Students/Details/'+data+'"  data-toggle="tooltip" data-placement="top" title="View Details"><i class="fa fa-info-circle" aria-hidden="true">View Transcript&nbsp;&nbsp;</i></a>';
+                    }
+                },
+                { "data": "MatricNo", "autoWidth": true, "orderable": true },
+                { "data": "FullName", "autoWidth": true, "orderable": true },
+                { "data": "Email", "autoWidth": true },
+                { "data": "DeptName", "autoWidth": true },
+                { "data": "FacultyName", "autoWidth": true },
+                { "data": "YearOfAttendance", "autoWidth": true },
+                { "data": "Gender", "autoWidth": true },
+
+
+                { "data": "FirstName", "autoWidth": true },
+                { "data": "LastName", "autoWidth": true },
+                { "data": "YearOfAward", "autoWidth": true },
+
+
+            ],
+
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                { extend: 'copy' },
+                { extend: 'csv' },
+                { extend: 'excel', title: 'FacultyList' },
+                { extend: 'pdf', title: 'FacultyList' },
+
+                {
+                    extend: 'print',
+                    customize: function (win) {
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+        });
+        window.oTable.fnSort([[1, "asc"], [2, "desc"]]);
+
+    });
+    $(window).scroll(function(){
+        $("#mydetailBody").stop().animate({"marginTop": ($(window).scrollTop()) + "px", "marginLeft":($(window).scrollLeft()) + "px"}, "slow" );
+    });
+
+    function Detail(studentId) {
+        //window.alert(subjecId);
+        var url = "/Students/PartialDetails?id=" + studentId;
+        $('#mydetailBody').load(url);
+
+    };
+
+
+
+</script>

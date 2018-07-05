@@ -1,0 +1,138 @@
+﻿@model TranscriptModels.Result
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Result</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.CourseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.CourseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.MatricNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.MatricNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Session)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Session)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Semester)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semester)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalUnitTaken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalUnitTaken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalUnitPassed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalUnitPassed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotaGradePoints)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotaGradePoints)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradePointAverage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradePointAverage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitOfCompulsoryCourse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitOfCompulsoryCourse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CumulativeUnitTakenSoFar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CumulativeUnitTakenSoFar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CumulativeUnitPassedSoFar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CumulativeUnitPassedSoFar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CummulativeGradePoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CummulativeGradePoint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CummulativeGradePointAverage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CummulativeGradePointAverage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OutstandingCourses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OutstandingCourses)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ResultId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

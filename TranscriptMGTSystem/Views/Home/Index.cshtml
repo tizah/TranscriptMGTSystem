@@ -1,31 +1,114 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using TranscriptMGTSystem.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="content-box wow bounceInDown modal-content">
+        <div class="content-box-header content-box-header-alt bg-default">
+            <span class="icon-separator">
+                <i class="glyph-icon icon-cog"></i>
+            </span>
+            <span class="header-wrapper">
+                Members area
+                <small>Login to your account.</small>
+            </span>
+            <span class="header-buttons">
+                <a href="@Url.Action("Register","Account")" class="btn btn-sm btn-primary" title="">Apply For Transcript</a>
+            </span>
+        </div>
+        <div class="content-box-wrapper">
+            <div class="form-group col-md-12">
+                <div class="col-md-2"></div>
+                <div class="input-group form-group col-md-8">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", @placeholder = "Enter email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    @*<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">*@
+                    <span class="input-group-addon bg-blue">
+                        <i class="glyph-icon icon-envelope-o"></i>
+                    </span>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="form-group input-group">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @type = "password", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">*@
+                    <span class="input-group-addon bg-blue">
+                        <i class="glyph-icon icon-unlock-alt"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "col-md-12" })
+                @Html.LabelFor(m => m.RememberMe, new { @class = "col-md-12" })
+            </div>
+            <div class="form-group col-md-12">
+                <a href="@Url.Action("ForgotPassword","Account")" title="Recover password">Forgot Your Password?</a>
+            </div>
+            <button class="btn btn-success btn-block">Sign In</button>
+        </div>
+    </div>
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!-- WIDGETS -->
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<script type="text/javascript" src="~/Content/assets/bootstrap/js/bootstrap.js"></script>
+
+
+
+<script type="text/javascript" src="~/Content/assets/widgets/progressbar/progressbar.js"></script>
+
+
+<script type="text/javascript" src="~/Content/assets/widgets/superclick/superclick.js"></script>
+
+<!-- Input switch alternate -->
+
+<script type="text/javascript" src="~/Content/assets/widgets/input-switch/inputswitch-alt.js"></script>
+
+<!-- Slim scroll -->
+
+<script type="text/javascript" src="~/Content/assets/widgets/slimscroll/slimscroll.js"></script>
+
+<!-- Slidebars -->
+
+<script type="text/javascript" src="~/Content/assets/widgets/slidebars/slidebars.js"></script>
+<script type="text/javascript" src="~/Content/assets/widgets/slidebars/slidebars-demo.js"></script>
+
+<!-- PieGage -->
+
+<script type="text/javascript" src="~/Content/assets/widgets/charts/piegage/piegage.js"></script>
+<script type="text/javascript" src="~/Content/assets/widgets/charts/piegage/piegage-demo.js"></script>
+
+<!-- Screenfull -->
+
+<script type="text/javascript" src="~/Content/assets/widgets/screenfull/screenfull.js"></script>
+
+<!-- Content box -->
+
+<script type="text/javascript" src="~/Content/assets/widgets/content-box/contentbox.js"></script>
+
+<!-- Overlay -->
+
+<script type="text/javascript" src="~/Content/assets/widgets/overlay/overlay.js"></script>
+
+<!-- Widgets init for demo -->
+
+<script type="text/javascript" src="~/Content/assets/js-init/widgets-init.js"></script>
+
+<!-- Theme layout -->
+
+<script type="text/javascript" src="~/Content/assets/themes/admin/layout.js"></script>
+
+<!-- Theme switcher -->
+
+<script type="text/javascript" src="~/Content/assets/widgets/theme-switcher/themeswitcher.js"></script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
