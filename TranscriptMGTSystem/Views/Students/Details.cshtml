@@ -148,13 +148,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var grade in Model.Courses)
+                                @foreach (var session in Model.Cgpas.Distinct().ToList())
                                 {
-                                    <tr>
-                                        <td>@grade.Course.CourseCode</td>
-                                        <td>@grade.Course.CourseName</td>
-                                        <td>@grade.Course.CreditUint</td>
-                                        <td>@grade.GradeName
+                                    <h3> Session @session.Session</h3>
+                                    foreach (var grade in Model.Courses)
+                                    {
+                                        <tr>
+                                            <td>@grade.Course.CourseCode</td>
+                                            <td>@grade.Course.CourseName</td>
+                                            <td>@grade.Course.CreditUint</td>
+                                            <td>
+                                                @grade.GradeName
                                         </td>
                                         <td>
                                             @foreach (var cgpa in grade.Student.Results.Where(x => x.StudentId.Equals(grade.StudentId)))
@@ -165,6 +169,8 @@
                                     </tr>
 
                                 }
+                                }
+
                             </tbody>
 
                         </table>

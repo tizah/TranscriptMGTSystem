@@ -47,25 +47,7 @@ namespace TranscriptMGTSystem.Controllers
                     var noOfCol = workSheet.Dimension.End.Column;
                     var noOfRow = workSheet.Dimension.End.Row - 5;
 
-                    //int requiredField = 14;
-
-                    //string validCheck = myExcel.ValidateExcel(noOfRow, workSheet, requiredField);
-                    //if (!validCheck.Equals("Success"))
-                    //{
-                    //    //string row = "";
-                    //    //string column = "";
-                    //    string[] ssizes = validCheck.Split(' ');
-                    //    string[] myArray = new string[2];
-                    //    for (int i = 0; i < ssizes.Length; i++)
-                    //    {
-                    //        myArray[i] = ssizes[i];
-                    //        // myArray[i] = ssizes[];
-                    //    }
-                    //    string lineError = $"Line/Row number {myArray[0]}  and column {myArray[1]} is not rightly formatted, Please Check for anomalies ";
-                    //    //ViewBag.LineError = lineError;
-                    //    ViewBag.Message = lineError;
-                    //    // return View("Index");
-                    //}
+                    
                     var courseColumnStop = noOfCol - 14;
 
                     // List<string> courseList = new List<string>();
@@ -82,14 +64,15 @@ namespace TranscriptMGTSystem.Controllers
                             var mycourse = new CourseUploadVm()
                             {
                                 CourseId = col,
-                                CourseName = workSheet.Cells[myrow, col].Value.ToString().Trim(),
-                                CourseCode = workSheet.Cells[myrow + 1, col].Value.ToString().Trim(),
-                                CreditUnit = workSheet.Cells[myrow + 2, col].Value.ToString().Trim()
+                                CourseName = workSheet.Cells[myrow, col].Value.ToString().Trim() == null ? "." : workSheet.Cells[myrow, col].Value.ToString().Trim() ,
+                                CourseCode = workSheet.Cells[myrow + 1, col].Value == null ? string.Empty: workSheet.Cells[myrow + 1, col].Value.ToString().Trim(),
+                           
+                                CreditUnit = workSheet.Cells[myrow + 2, col].Value == null ? string.Empty : workSheet.Cells[myrow + 2, col].Value.ToString().Trim(),
                             };
 
                             courseListvm.Add(mycourse);
                             // myrow = myrow + 1;
-                            var hasCourse = db.Courses.Where(x => x.CourseCode.Equals(mycourse.CourseCode) && x.CourseName.Equals(mycourse.CourseName)).FirstOrDefault();
+                            var hasCourse = db.Courses.Where(x => x.CourseCode.Equals(mycourse.CourseCode.ToUpper()) && x.CourseName.Equals(mycourse.CourseName.ToUpper())).FirstOrDefault();
 
                             if (hasCourse == null)
                             {
@@ -116,13 +99,13 @@ namespace TranscriptMGTSystem.Controllers
 
                         var gradingVm = new List<ResultVm>();
                         var myCourseGrade = new List<CourseGradeVm>();
-                        var matricNo = workSheet.Cells[row, 1].Value.ToString().Trim();
+                        var matricNo = workSheet.Cells[row, 1].Value == null ? string.Empty : workSheet.Cells[row, 1].Value.ToString().Trim();
                         var matricNoFromDb = db.Students.Where(x => x.MatricNo.Equals(matricNo)).Select(x => x.StudentId).FirstOrDefault();
                         if (matricNoFromDb != null)
                         {
 
-                            var Session = workSheet.Cells[row, 2].Value.ToString().Trim();
-                            var Semester = workSheet.Cells[row, 3].Value.ToString().Trim();
+                            var Session = workSheet.Cells[row, 2].Value == null  ? string.Empty : workSheet.Cells[row, 2].Value.ToString().Trim();
+                            var Semester = workSheet.Cells[row, 3].Value == null ? string.Empty : workSheet.Cells[row, 3].Value.ToString().Trim();
                             var courseGrade = new CourseGrade();
                             for (int col = 4; col <= courseColumnStop + 3; col++)
                             {
@@ -131,7 +114,7 @@ namespace TranscriptMGTSystem.Controllers
                                                                        .Select(s => s.CourseId).FirstOrDefault();
                                 courseGrade.CourseId = courseId;
 
-                                courseGrade.GradeName = workSheet.Cells[row, col].Value.ToString().Trim();
+                                courseGrade.GradeName = workSheet.Cells[row, col].Value == null ? string.Empty : workSheet.Cells[row, col].Value.ToString().Trim();
                                 courseGrade.StudentId = matricNoFromDb;
                                 //studentRecord.Session = Session;
                                 //studentRecord.Semester = Semester;
@@ -142,20 +125,21 @@ namespace TranscriptMGTSystem.Controllers
                             }
 
                             var Startup = courseColumnStop + 5;
+                            //essence of writing ternary operator is to test for null cells in the excel sheet and replace with a default value
                             for (int col = Startup; col <= Startup; col++)
                             {
                                 ResultVm myGrading = new ResultVm();
-                                // {
-                                myGrading.TotalUnitTaken = Convert.ToInt32(workSheet.Cells[row, col].Value.ToString().Trim());
-                                myGrading.TotalUnitPassed = Convert.ToInt32(workSheet.Cells[row, col + 1].Value.ToString().Trim());
-                                myGrading.TotaGradePoints = Convert.ToInt32(workSheet.Cells[row, col + 2].Value.ToString().Trim());
-                                myGrading.GradePointAverage = Convert.ToDouble(workSheet.Cells[row, col + 3].Value.ToString().Trim());
-                                myGrading.UnitOfCompulsoryCourse = Convert.ToInt32(workSheet.Cells[row, col + 4].Value.ToString().Trim());
-                                myGrading.CumulativeUnitTakenSoFar = Convert.ToInt32(workSheet.Cells[row, col + 5].Value.ToString().Trim());
-                                myGrading.CumulativeUnitPassedSoFar = Convert.ToInt32(workSheet.Cells[row, col + 6].Value.ToString().Trim());
-                                myGrading.CummulativeGradePoint = Convert.ToInt32(workSheet.Cells[row, col + 7].Value.ToString().Trim());
-                                myGrading.CummulativeGradePointAverage = Convert.ToDouble(workSheet.Cells[row, col + 8].Value.ToString().Trim());
-                                myGrading.OutstandingCourses = workSheet.Cells[row, col + 9].Value.ToString().Trim();
+                                
+                                myGrading.TotalUnitTaken = Convert.ToInt32(workSheet.Cells[row, col].Value == null ? 0 : Convert.ToInt32(workSheet.Cells[row, col].Value.ToString().Trim()));
+                                myGrading.TotalUnitPassed = Convert.ToInt32(workSheet.Cells[row, col + 1].Value == null ? 0 : Convert.ToInt32(workSheet.Cells[row, col + 1].Value.ToString().Trim()));
+                                myGrading.TotaGradePoints = Convert.ToInt32(workSheet.Cells[row, col + 2].Value == null ? 0 : Convert.ToInt32(workSheet.Cells[row, col + 2].Value == null ? 0 : Convert.ToInt32(workSheet.Cells[row, col + 2].Value.ToString().Trim())));
+                                myGrading.GradePointAverage = Convert.ToDouble(workSheet.Cells[row, col + 3].Value == null ? 0 : Convert.ToDouble(workSheet.Cells[row, col + 3].Value.ToString().Trim()));
+                                myGrading.UnitOfCompulsoryCourse = Convert.ToInt32(workSheet.Cells[row, col + 4].Value == null ? 0 : Convert.ToInt32(workSheet.Cells[row, col + 4].Value.ToString().Trim()));
+                                myGrading.CumulativeUnitTakenSoFar = Convert.ToInt32(workSheet.Cells[row, col + 5].Value == null ? 0 : Convert.ToInt32(workSheet.Cells[row, col + 5].Value.ToString().Trim()));
+                                myGrading.CumulativeUnitPassedSoFar = Convert.ToInt32(workSheet.Cells[row, col + 6].Value == null ? 0 : Convert.ToInt32(workSheet.Cells[row, col + 6].Value.ToString().Trim()));
+                                myGrading.CummulativeGradePoint = Convert.ToInt32(workSheet.Cells[row, col + 7].Value == null ? 0 : Convert.ToInt32(workSheet.Cells[row, col + 7].Value.ToString().Trim()));
+                                myGrading.CummulativeGradePointAverage = Convert.ToDouble(workSheet.Cells[row, col + 8].Value == null ? 0 : Convert.ToDouble(workSheet.Cells[row, col + 8].Value.ToString().Trim()));
+                                myGrading.OutstandingCourses = workSheet.Cells[row, col + 9].Value == null ? " "  : workSheet.Cells[row, col + 9].Value.ToString().Trim();
 
                                 //};
                                 gradingVm.Add(myGrading);
@@ -175,40 +159,7 @@ namespace TranscriptMGTSystem.Controllers
                             }
 
                         }
-                        //var matricNo = workSheet.Cells[row, 1].Value.ToString().Trim();
-                        //var Session = workSheet.Cells[row, 2].Value.ToString().Trim();
-                        //var Semester = workSheet.Cells[row, 3].Value.ToString().Trim();
-
-
-
-                        //try
-                        //{
-                        //    var studentMatNo = db.Students.FirstOrDefault(x => x.MatricNo.Equals(matricNo));
-
-                        //    if (studentMatNo == null)
-                        //    {
-
-                        //        Course1 courses = new Course1();
-                        //        Grade grade = new Grade()
-                        //        {
-
-                        //        };
-
-                        //        //db.SaveChanges();
-                        //    }
-                        //    recordCount++;
-                        //    //lastrecord = $"The last Updated record has the Mat  Number {matricNo} and First Name {FirstName} and LastName {LastName}";
-
-                        //}
-
-                        //catch (Exception ex)
-                        //{
-                        //    ViewBag.ErrorInfo = "The Dept code or Semester Name in the excel doesn't exist";
-                        //    ViewBag.ErrorMessage = ex.Message;
-                        //    return View("ErrorException");
-                        //}
-
-
+                       
              
                         message = $"You have successfully Uploaded {recordCount} records...  and {lastrecord}";
                         ViewBag.Message = message;
@@ -221,6 +172,15 @@ namespace TranscriptMGTSystem.Controllers
             return View();
         }
 
+        //method to try and eliminate null values in excelsheet
+        private int ReplaceNullValues(object value)
+        {
+            if (value == null || value.ToString() == "." )
+            {
+                return 0;
+            }
+            return Convert.ToInt32(value);
+        }
 
 
         // GET: Results/Details/5
