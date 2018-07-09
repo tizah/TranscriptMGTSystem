@@ -221,6 +221,14 @@
     <Compile Include="Migrations\201807051246224_ChangesToCourseGrade.Designer.cs">
       <DependentUpon>201807051246224_ChangesToCourseGrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807080820556_seedData.cs" />
+    <Compile Include="Migrations\201807080820556_seedData.Designer.cs">
+      <DependentUpon>201807080820556_seedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807081718254_FacultyNameAdded.cs" />
+    <Compile Include="Migrations\201807081718254_FacultyNameAdded.Designer.cs">
+      <DependentUpon>201807081718254_FacultyNameAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -620,6 +628,9 @@
     <Content Include="Content\assets\widgets\charts\._sparklines" />
     <Content Include="Content\assets\widgets\charts\._xcharts" />
     <Content Include="Content\assets\widgets\maps\._vector-maps" />
+    <Content Include="ExcelTemplates\StudentRecord.xlsx" />
+    <Content Include="ExcelTemplates\StudentTranscript.xlsx" />
+    <Content Include="ExcelTemplates\StudentTranscript2.xlsx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -708,6 +719,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807051246224_ChangesToCourseGrade.resx">
       <DependentUpon>201807051246224_ChangesToCourseGrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807080820556_seedData.resx">
+      <DependentUpon>201807080820556_seedData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807081718254_FacultyNameAdded.resx">
+      <DependentUpon>201807081718254_FacultyNameAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

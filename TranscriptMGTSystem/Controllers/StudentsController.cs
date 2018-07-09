@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -40,6 +42,42 @@ namespace TranscriptMGTSystem.Controllers
                                                              ).ToList()
             };
             return View(model);
+        }
+
+        //this is the method that is used to send Transcript as an email to either a user or a school
+        public JsonResult SendMailToUser(string myemail, string mysubject)
+        {
+            bool result = false;
+            result = SendEmail(myemail,mysubject,"this is transcript system from University of Lagos");
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool SendEmail(string toEmail, string subject, string body)
+        {
+            try
+            {
+                string senderEmail = System.Configuration.ConfigurationManager.AppSettings["SendEmail"].ToString();
+
+                string senderPassword = System.Configuration.ConfigurationManager.AppSettings["SendPassword"].ToString();
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.Timeout = 100000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(senderEmail,senderPassword);
+                MailMessage mailMessage = new MailMessage(senderEmail, toEmail, subject, body);
+                mailMessage.IsBodyHtml = true;
+                mailMessage.BodyEncoding = UTF8Encoding.UTF8;
+         
+             
+                client.Send(mailMessage);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public async Task<ActionResult> GetIndex(string search)

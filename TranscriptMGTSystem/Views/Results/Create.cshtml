@@ -4,7 +4,11 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>
+    Excel Template
+
+    <a href="~/ExcelTemplates/StudentTranscript2.xlsx">~/ExcelTemplates/StudentTranscript2.xlsx</a>
+</h2>
 
 @using (Html.BeginForm("UploadStudentGrade", "Results", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

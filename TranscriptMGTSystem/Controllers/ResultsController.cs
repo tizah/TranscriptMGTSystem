@@ -45,10 +45,10 @@ namespace TranscriptMGTSystem.Controllers
                     var currentSheet = package.Workbook.Worksheets;
                     var workSheet = currentSheet.First();
                     var noOfCol = workSheet.Dimension.End.Column;
-                    var noOfRow = workSheet.Dimension.End.Row - 5;
+                    var noOfRow = workSheet.Dimension.End.Row - 5; //added minus 5 because i want to start reading the excel sheet from the 5th row
 
                     
-                    var courseColumnStop = noOfCol - 14;
+                    var courseColumnStop = noOfCol - 14; // added minus 14 because the number of columns apart from the courses are 14 in total
 
                     // List<string> courseList = new List<string>();
                     var courseListvm = new List<CourseUploadVm>();
@@ -118,13 +118,14 @@ namespace TranscriptMGTSystem.Controllers
                                 courseGrade.StudentId = matricNoFromDb;
                                 //studentRecord.Session = Session;
                                 //studentRecord.Semester = Semester;
-
+                            
+                                //write a validation to check for duplicate record
                                 db.CourseGrades.Add(courseGrade);
                                 db.SaveChanges();
 
                             }
 
-                            var Startup = courseColumnStop + 5;
+                            var Startup = courseColumnStop + 4;
                             //essence of writing ternary operator is to test for null cells in the excel sheet and replace with a default value
                             for (int col = Startup; col <= Startup; col++)
                             {
@@ -140,22 +141,48 @@ namespace TranscriptMGTSystem.Controllers
                                 myGrading.CummulativeGradePoint = Convert.ToInt32(workSheet.Cells[row, col + 7].Value == null ? 0 : Convert.ToInt32(workSheet.Cells[row, col + 7].Value.ToString().Trim()));
                                 myGrading.CummulativeGradePointAverage = Convert.ToDouble(workSheet.Cells[row, col + 8].Value == null ? 0 : Convert.ToDouble(workSheet.Cells[row, col + 8].Value.ToString().Trim()));
                                 myGrading.OutstandingCourses = workSheet.Cells[row, col + 9].Value == null ? " "  : workSheet.Cells[row, col + 9].Value.ToString().Trim();
-
+                                myGrading.FacultyName = workSheet.Cells[row, col + 10].Value == null ? " " : workSheet.Cells[row, col + 10].Value.ToString().Trim();
                                 //};
                                 gradingVm.Add(myGrading);
-                                studentRecord.Semester = Semester;
-                                studentRecord.Session = Session;
-                                studentRecord.TotalUnitTaken = myGrading.TotalUnitTaken;
-                                studentRecord.TotalUnitPassed = myGrading.TotalUnitPassed;
-                                studentRecord.TotaGradePoints = myGrading.TotaGradePoints;
-                                 studentRecord.StudentId = matricNoFromDb;
-                                studentRecord.CourseId = courseGrade.CourseId;
-                                studentRecord.CumulativeUnitTakenSoFar = myGrading.CumulativeUnitTakenSoFar;
-                                studentRecord.CumulativeUnitPassedSoFar = myGrading.CumulativeUnitPassedSoFar;
-                                studentRecord.CummulativeGradePoint = myGrading.CummulativeGradePoint;
-                                studentRecord.CummulativeGradePointAverage = myGrading.CummulativeGradePointAverage;
-                                studentRecord.OutstandingCourses = myGrading.OutstandingCourses;
-                                db.Results.Add(studentRecord);
+
+                                //test if exact record exit in db
+                                var mysession = db.Results.Where(x => x.Session.Equals(Session)).ToString();
+                                var mysemester = db.Results.Where(x => x.Semester.Equals(Semester)).ToString();
+
+                                var studentIdFromDb = db.Students.Where(x => x.MatricNo.Equals(matricNo)).Select(x => x.StudentId).FirstOrDefault();
+
+                                var studentTranscriptRecord = db.Results.Where(x => x.StudentId.Equals(studentIdFromDb)).FirstOrDefault();
+
+                                if (studentTranscriptRecord != null)
+                                {
+                                    if (studentTranscriptRecord.CummulativeGradePoint == myGrading.CummulativeGradePoint && studentTranscriptRecord.CummulativeGradePointAverage == myGrading.CummulativeGradePointAverage && studentTranscriptRecord.OutstandingCourses == myGrading.OutstandingCourses && studentTranscriptRecord.Semester == Semester && studentTranscriptRecord.Session == Session && studentTranscriptRecord.GradePointAverage == myGrading.GradePointAverage)
+                                    {
+                                        // error message to say that record already exist
+                                        ViewBag.Message = "this record already exist";
+
+                                    }
+                                }
+                               
+                                else
+                                {
+                                    studentRecord.Semester = Semester;
+                                    studentRecord.Session = Session;
+                                    studentRecord.TotalUnitTaken = myGrading.TotalUnitTaken;
+                                    studentRecord.TotalUnitPassed = myGrading.TotalUnitPassed;
+                                    studentRecord.TotaGradePoints = myGrading.TotaGradePoints;
+                                    studentRecord.StudentId = matricNoFromDb;
+                                    studentRecord.CourseId = courseGrade.CourseId;
+                                    studentRecord.CumulativeUnitTakenSoFar = myGrading.CumulativeUnitTakenSoFar;
+                                    studentRecord.CumulativeUnitPassedSoFar = myGrading.CumulativeUnitPassedSoFar;
+                                    studentRecord.CummulativeGradePoint = myGrading.CummulativeGradePoint;
+                                    studentRecord.CummulativeGradePointAverage = myGrading.CummulativeGradePointAverage;
+                                    studentRecord.OutstandingCourses = myGrading.OutstandingCourses;
+                                    studentRecord.FacultyName = myGrading.FacultyName;
+                                    db.Results.Add(studentRecord);
+                                }
+
+
+                               
                             }
 
                         }

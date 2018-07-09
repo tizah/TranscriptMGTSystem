@@ -18,5 +18,7 @@ namespace TranscriptMGTSystem.ViewModels
         public double CummulativeGradePointAverage { get; set; }
 
         public string OutstandingCourses { get; set; }
+
+        public string FacultyName { get; set; }
     }
 }

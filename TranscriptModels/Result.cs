@@ -23,6 +23,7 @@ namespace TranscriptModels
         public double CummulativeGradePointAverage { get; set; }
 
         public string OutstandingCourses { get; set; }
+        public string FacultyName { get; set; }
 
         public int StudentId { get; set; }
         public Student Student { get; set; }

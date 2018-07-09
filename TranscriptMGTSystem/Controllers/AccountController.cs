@@ -79,7 +79,12 @@ namespace TranscriptMGTSystem.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (returnUrl != null)
+                    {
+                        //return RedirectToLocal(returnUrl);
+                        return Redirect(returnUrl);
+                    }
+                    return RedirectToAction("Index", "Students");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
