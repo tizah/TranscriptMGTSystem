@@ -1,0 +1,114 @@
+﻿@model TranscriptMGTSystem.ViewModels.StudentTranscriptViewModel
+
+
+<button onclick="generatePDF()" class="btn btn-alt btn-hover btn-info">
+    <span>Generate Transcript</span>
+    <i class="glyph-icon icon-print"></i>
+</button>
+<div id="TranscriptTemplate">
+  <h3>University Of Lagos Transcript</h3>
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>Matric Number</th>
+                <td> @Html.DisplayFor(model => model.Student.MatricNo)</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td> @Html.DisplayFor(model => model.Student.FirstName)</td>
+            </tr>
+            <tr>
+                <th>Other Name</th>
+                <td>  @Html.DisplayNameFor(model => model.Student.OtherNames)</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td> @Html.DisplayFor(model => model.Student.FirstName)</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td> @Html.DisplayFor(model => model.Student.Email)</td>
+            </tr>
+            <tr>
+                <th>Department</th>
+                <td> @Html.DisplayFor(model => model.Student.DeptName)</td>
+            </tr>
+            <tr>
+                <th>Faculty</th>
+                <td> @Html.DisplayFor(model => model.Student.FacultyName)</td>
+            </tr>
+     
+            <tr>
+                <th>Gender</th>
+                <td> @Html.DisplayFor(model => model.Student.Gender)</td>
+            </tr>
+            <tr>
+                <th>Mode of Admission</th>
+                <td> @Html.DisplayFor(model => model.Student.ModeOfAdmission)</td>
+            </tr>
+            <tr>
+                <th>Nationality</th>
+                <td> @Html.DisplayFor(model => model.Student.Nationality)</td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td> @Html.DisplayFor(model => model.Student.DateOfBirth)</td>
+            </tr>
+            <tr>
+                <th>Year of Attendance</th>
+                <td> @Html.DisplayFor(model => model.Student.YearOfAttendance)</td>
+            </tr>
+            <tr>
+                <th>Degree Awarded</th>
+                <td> @Html.DisplayFor(model => model.Student.DegreeAwared)</td>
+            </tr>
+            <tr>
+                <th>Year Awarded</th>
+                <td> @Html.DisplayFor(model => model.Student.YearOfAward)</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Credit Unit</th>
+                    <th>Grade Point</th>
+                    <th>CGPA</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var session in Model.Cgpas.Distinct().ToList())
+                {
+                    <h3> Session @session.Session</h3>
+                    foreach (var grade in Model.Courses)
+                    {
+                        <tr>
+                            <td>@grade.Course.CourseCode</td>
+                            <td>@grade.Course.CourseName</td>
+                            <td>@grade.Course.CreditUint</td>
+                            <td>
+                                @grade.GradeName
+                            </td>
+                            <td>
+                                @foreach (var cgpa in grade.Student.Results.Where(x => x.StudentId.Equals(grade.StudentId)))
+                                {
+                                    @cgpa.CummulativeGradePointAverage
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+
+</div>
+<script type="text/javascript">
+
+
+</script>

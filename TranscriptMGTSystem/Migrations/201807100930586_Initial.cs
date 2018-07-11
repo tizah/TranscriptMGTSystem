@@ -8,6 +8,38 @@ namespace TranscriptMGTSystem.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.ApplicantTables",
+                c => new
+                    {
+                        ApplicantTableId = c.Int(nullable: false, identity: true),
+                        Email = c.String(),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        OtherName = c.String(),
+                        MatricNo = c.String(),
+                        FacultyName = c.String(),
+                    })
+                .PrimaryKey(t => t.ApplicantTableId);
+            
+            CreateTable(
+                "dbo.CourseGrades",
+                c => new
+                    {
+                        CourseGradeId = c.Int(nullable: false, identity: true),
+                        GradeName = c.String(),
+                        CourseId = c.Int(nullable: false),
+                        StudentId = c.Int(nullable: false),
+                        Result_ResultId = c.Int(),
+                    })
+                .PrimaryKey(t => t.CourseGradeId)
+                .ForeignKey("dbo.Courses", t => t.CourseId, cascadeDelete: true)
+                .ForeignKey("dbo.Results", t => t.Result_ResultId)
+                .ForeignKey("dbo.Students", t => t.StudentId, cascadeDelete: true)
+                .Index(t => t.CourseId)
+                .Index(t => t.StudentId)
+                .Index(t => t.Result_ResultId);
+            
+            CreateTable(
                 "dbo.Courses",
                 c => new
                     {
@@ -36,6 +68,7 @@ namespace TranscriptMGTSystem.Migrations
                         CummulativeGradePoint = c.Int(nullable: false),
                         CummulativeGradePointAverage = c.Double(nullable: false),
                         OutstandingCourses = c.String(),
+                        FacultyName = c.String(),
                         StudentId = c.Int(nullable: false),
                         CourseId = c.Int(nullable: false),
                     })
@@ -143,8 +176,11 @@ namespace TranscriptMGTSystem.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.CourseGrades", "StudentId", "dbo.Students");
             DropForeignKey("dbo.Results", "StudentId", "dbo.Students");
+            DropForeignKey("dbo.CourseGrades", "Result_ResultId", "dbo.Results");
             DropForeignKey("dbo.Results", "CourseId", "dbo.Courses");
+            DropForeignKey("dbo.CourseGrades", "CourseId", "dbo.Courses");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -153,6 +189,9 @@ namespace TranscriptMGTSystem.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Results", new[] { "CourseId" });
             DropIndex("dbo.Results", new[] { "StudentId" });
+            DropIndex("dbo.CourseGrades", new[] { "Result_ResultId" });
+            DropIndex("dbo.CourseGrades", new[] { "StudentId" });
+            DropIndex("dbo.CourseGrades", new[] { "CourseId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -161,6 +200,8 @@ namespace TranscriptMGTSystem.Migrations
             DropTable("dbo.Students");
             DropTable("dbo.Results");
             DropTable("dbo.Courses");
+            DropTable("dbo.CourseGrades");
+            DropTable("dbo.ApplicantTables");
         }
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Transcript System</title>
 
 
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/assets/images/icons/apple-touch-icon-144-precomposed.png">
@@ -142,20 +142,109 @@
     <link rel="stylesheet" type="text/css" href="~/Content/assets/helpers/admin-responsive.css">
 
 
+    <script type="text/javascript">
+        $(window).load(function () {
+            setTimeout(function () {
+                $('#loading').fadeOut(400, "linear");
+            }, 300);
+        });
+    </script>
+
 </head>
 <body>
 
-
-    <div id="page-wrapper">
-        <div id="page-header" class="bg-black-opacity">
-            @Html.ActionLink("Transcript System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <div class="navbar-collapse collapse">
-
-                @Html.Partial("_LoginPartial")
-            </div>
-
+    <div id="page-header" class="bg-gradient-9">
+        <div id="mobile-navigation">
+            <button id="nav-toggle" class="collapsed" data-toggle="collapse" data-target="#page-sidebar"><span></span></button>
+            <a href="" class="logo-content-small" title="Transcript System"></a>
         </div>
+        <div id="header-logo" class="logo-bg">
+            <h2 class="logo-bg" title="Transcript System">
+            <br/>
+            Transcript System</h2>
+            @*<a href="index.html" class="logo-content-big" title="Transcript System">
+                Transcript <i>System</i>
+                <span>Easy to Generate Transcript</span>
+            </a>*@
+            <a href="index.html" class="logo-content-small" title="Transcript System">
+                Transcript <i>System</i>
+                <span>Making Work Easy</span>
+            </a>
+            @*<a id="close-sidebar" href="#" title="Close sidebar">
+                <i class="glyph-icon icon-angle-left"></i>
+            </a>*@
+        </div>
+        <div id="header-nav-left">
+            <div class="user-account-btn dropdown">
+
+                <div class="dropdown-menu float-left">
+                    <div class="box-sm">
+                        <div class="login-box clearfix">
+                            <div class="user-img">
+                                <a href="index.html#" title="" class="change-img">Change photo</a>
+                                <img src="../../assets/image-resources/gravatar.jpg.png" alt="">
+                            </div>
+                            <div class="user-info">
+                                <span>
+                                    Thomas Barnes
+                                    <i>UX/UI developer</i>
+                                </span>
+                                <a href="index.html#" title="Edit profile">Edit profile</a>
+                                <a href="index.html#" title="View notifications">View notifications</a>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <ul class="reset-ul mrg5B">
+                            <li>
+                                <a href="index.html#">
+                                    <i class="glyph-icon float-right icon-caret-right"></i>
+                                    View login page example
+
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <i class="glyph-icon float-right icon-caret-right"></i>
+                                    View lockscreen example
+
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <i class="glyph-icon float-right icon-caret-right"></i>
+                                    View account details
+
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="pad5A button-pane button-pane-alt text-center">
+                            <a href="index.html#" class="btn display-block font-normal btn-danger">
+                                <i class="glyph-icon icon-power-off"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- #header-nav-left -->
+
+        <div id="header-nav-right">
+
+            @Html.Partial("_LoginPartial")
+
+        </div><!-- #header-nav-right -->
+
     </div>
+    @*<div id="page-header" class="bg-gradient-9">
+            <div id="page-header" class="bg-black-opacity">
+                @Html.ActionLink("Transcript System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div class="navbar-collapse collapse">
+
+                    @Html.Partial("_LoginPartial")
+                </div>
+
+            </div>
+        </div>*@
 
     @* //////////////////// *@
     <div id="page-sidebar">
@@ -163,37 +252,48 @@
 
 
             <ul id="sidebar-menu">
-                <li class="header"><span>Overview</span></li>
+                <li class="header"><span>Manage Students</span></li>
                 <li>
                     <a href="@Url.Action("Create","Students")" title="Upload Student Record">
-                        <i class="glyph-icon icon-linecons-tv"></i>
+                        <i class="glyph-icon icon-user"></i>
                         <span>Upload Students Record</span>
                     </a>
                 </li>
                 <li class="divider"></li>
-                <li class="no-menu">
-                    <a href="@Url.Action("Create","Courses")" title="Upload Courses">
-                        <i class="glyph-icon icon-linecons-beaker"></i>
-                        <span>Upload Coursesx</span>
-                        <span class="bs-label label-danger">
-                            NEW
-                        </span>
+                <li>
+                    <a href="@Url.Action("Index","Students")" title="View Student Record">
+                        <i class="glyph-icon icon-users"></i>
+                        <span>View Transcripts</span>
                     </a>
                 </li>
                 <li class="divider"></li>
-                <li class="header"><span>CGPA</span></li>
+
+
+                <li class="header"><span>Manage Course</span></li>
+                <li class="no-menu">
+                    <a href="@Url.Action("Index","Courses")" title="View Courses">
+                        <i class="glyph-icon icon-book"></i>
+                        <span>View Courses</span>
+
+                    </a>
+                </li>
+                <li class="divider"></li>
+          
+                <li class="divider"></li>
+                <li class="header"><span>Upload Results</span></li>
                 <li>
-                    <a href="@Url.Action("Create","Results")" title="Elements">
-                        <i class="glyph-icon icon-linecons-diamond"></i>
+                    <a href="@Url.Action("Create","Results")" title="Upload Results">
+                        <i class="glyph-icon icon-table"></i>
                         <span>Upload Results</span>
                     </a>
                 </li>
                 <li class="divider"></li>
-                <li>
+                @*<li>
                     <a href="@Url.Action("Index","Students")" title="Elements">
                         <i class="glyph-icon icon-linecons-diamond"></i>
                         <span>View Transcripts</span>
                     </a>
+                </li>*@
 
             </ul>
         </div>
@@ -208,6 +308,7 @@
                 @RenderBody()
                 <div>
                 </div>
+
             </div>
         </div>
         <hr />

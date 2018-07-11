@@ -16,6 +16,12 @@ body .content-box-header > .ui-tabs-nav li.ui-tabs-active > a:hover,
 a {
     color: #8da0aa;
 }
+#custom-header{
+    color: #ffffff;
+}
+.custom-header {
+    color: #ffffff;
+}
 /* Primary font color */
 
 .tabs-nav li a:hover,

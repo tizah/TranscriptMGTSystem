@@ -5,11 +5,11 @@
 }
 
 <h2>
-    Excel Template
-    <a href="~/ExcelTemplates/StudentRecord.xlsx">~/ExcelTemplates/StudentRecord.xlsx</a>
+    Excel Template <br/>
+    <a href="~/ExcelTemplates/StudentRecord.xlsx">Download Student Record Template</a>
 </h2>
 
-
+<br/>
 @using (Html.BeginForm("UploadStudentRecords", "Students", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.Raw(ViewBag.Error)

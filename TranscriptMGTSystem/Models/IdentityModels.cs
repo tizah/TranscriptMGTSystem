@@ -35,5 +35,6 @@ namespace TranscriptMGTSystem.Models
         public DbSet<Result> Results { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<CourseGrade> CourseGrades { get; set; }
+        public DbSet<ApplicantTable> ApplicantTables { get; set; }
     }
 }

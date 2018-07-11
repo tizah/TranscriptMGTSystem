@@ -6,10 +6,11 @@
 
 <h2>
     Excel Template
+    <br/>
 
-    <a href="~/ExcelTemplates/StudentTranscript2.xlsx">~/ExcelTemplates/StudentTranscript2.xlsx</a>
+    <a href="~/ExcelTemplates/StudentTranscript2.xlsx">Download Result Template</a>
 </h2>
-
+<br/>
 @using (Html.BeginForm("UploadStudentGrade", "Results", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.Raw(ViewBag.Error)    
@@ -22,6 +23,7 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+<br/>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -201,6 +201,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicantTablesController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\ExcelValidation.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -209,25 +211,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807050925219_Initial.cs" />
-    <Compile Include="Migrations\201807050925219_Initial.Designer.cs">
-      <DependentUpon>201807050925219_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807051231260_CourserGrade.cs" />
-    <Compile Include="Migrations\201807051231260_CourserGrade.Designer.cs">
-      <DependentUpon>201807051231260_CourserGrade.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807051246224_ChangesToCourseGrade.cs" />
-    <Compile Include="Migrations\201807051246224_ChangesToCourseGrade.Designer.cs">
-      <DependentUpon>201807051246224_ChangesToCourseGrade.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807080820556_seedData.cs" />
-    <Compile Include="Migrations\201807080820556_seedData.Designer.cs">
-      <DependentUpon>201807080820556_seedData.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807081718254_FacultyNameAdded.cs" />
-    <Compile Include="Migrations\201807081718254_FacultyNameAdded.Designer.cs">
-      <DependentUpon>201807081718254_FacultyNameAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201807100930586_Initial.cs" />
+    <Compile Include="Migrations\201807100930586_Initial.Designer.cs">
+      <DependentUpon>201807100930586_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -687,6 +673,18 @@
     <Content Include="Views\Results\Details.cshtml" />
     <Content Include="Views\Results\Edit.cshtml" />
     <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\ApplicantTables\Create.cshtml" />
+    <Content Include="Views\ApplicantTables\Delete.cshtml" />
+    <Content Include="Views\ApplicantTables\Details.cshtml" />
+    <Content Include="Views\ApplicantTables\Edit.cshtml" />
+    <Content Include="Views\ApplicantTables\Index.cshtml" />
+    <Content Include="Views\ApplicantTables\ApplicantConfirmationPage.cshtml" />
+    <Content Include="Views\Students\TranscriptTemplate.cshtml" />
+    <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -711,20 +709,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807050925219_Initial.resx">
-      <DependentUpon>201807050925219_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807051231260_CourserGrade.resx">
-      <DependentUpon>201807051231260_CourserGrade.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807051246224_ChangesToCourseGrade.resx">
-      <DependentUpon>201807051246224_ChangesToCourseGrade.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807080820556_seedData.resx">
-      <DependentUpon>201807080820556_seedData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807081718254_FacultyNameAdded.resx">
-      <DependentUpon>201807081718254_FacultyNameAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807100930586_Initial.resx">
+      <DependentUpon>201807100930586_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

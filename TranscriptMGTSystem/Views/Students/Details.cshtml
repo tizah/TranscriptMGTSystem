@@ -4,19 +4,45 @@
 @{
     ViewBag.Title = "Details";
 }
+<style>
+    /* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba( 255, 255, 255, .8 ) url('http://i.stack.imgur.com/FhHRx.gif') 50% 50% no-repeat;
+    }
+
+    /* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+    body.loading .modal {
+        overflow: hidden;
+    }
+
+    /* Anytime the body has the loading class, our
+   modal element will be visible */
+    body.loading .modal {
+        display: block;
+    }
+</style>
 
 
 <section id="content" class="row">
     <div class="col-md-6">
 
         <hr />
-        <button onclick="generatePDF()" class="btn btn-alt btn-hover btn-info">
-            <span>Generate Transcript</span>
-            <i class="glyph-icon icon-print"></i>
-        </button>
+   
         @*<button id="cmd">Generate PDF</button>*@
         @*<input type="button" onclick="printInvoice()" class="btn btn-success" value="Generate PDF" />*@
-        <dl class="dl-horizontal">
+        @*<dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Student.MatricNo)
             </dt>
@@ -129,31 +155,37 @@
                 @Html.DisplayFor(model => model.Student.YearOfAward)
             </dd>
 
-        </dl>
+        </dl>*@
         <div class="alert alert-info alert-dismissible">
             @*<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>*@
             <strong>Enter</strong> an Email address to send the Transcript.
         </div>
-        <div class="">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-envelope"></i></span>
-                <input type="text" class="form-control" placeholder="Email" aria-describedby="sizing-addon1" id="email">
-            </div>
-            <br />
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-asterisk"></i></span>
-                <textarea type="text" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1" id="subject"></textarea>
-            </div>
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-file"></i></span>
-                <input type="file" class="form-control" placeholder="Transcript Upload" aria-describedby="sizing-addon1" id="fileUpload">
-            </div>
-            <br />
-            <input type="button" onclick="sendEmail()" value="Send Email" class="btn btn-primary">
-        </div>
-    </div>
 
-    <div class="col-md-6">
+        <form enctype="multipart/form-data" method="post" name="fileinfo">
+            <div class="">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input type="text" class="form-control" placeholder="Email" aria-describedby="sizing-addon1" id="email">
+                </div>
+                <br />
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-asterisk"></i></span>
+                    <textarea type="text" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1" id="subject"></textarea>
+                </div>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-file"></i></span>
+                    <input type="file" class="form-control" placeholder="Transcript Upload" aria-describedby="sizing-addon1" id="fileUpload" name="attachment">
+                </div>
+                <br />
+                <input type="button" onclick="sendEmail()" value="Send Email" class="btn btn-primary">
+            </div>
+            </form>
+    </div>
+    <div >
+    @Html.Partial("TranscriptTemplate") 
+        </div>
+
+    @*<div class="col-md-6">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel">
@@ -203,48 +235,83 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 </section>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Student.StudentId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<div class="modal"><!-- Place at bottom of page --></div>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
 <script type="text/javascript">
 
 
+    //FormData attachment = new FormData();
+    //var file = $("#fileUpload").val();
+    //aler(file);
+
+
+
     function generatePDF() {
-        
-        window.print();
+        //$('#TranscriptTemplate').print();
+        var prtContent = document.getElementById("TranscriptTemplate");
+        var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent.innerHTML);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
     }
+
+    //$body = $("body");
+
+    //$(document).on({
+    //    ajaxStart: function () { $body.addClass("loading"); },
+    //    ajaxStop: function () { $body.removeClass("loading"); }
+    //});
 
     var sendEmail = function () {
         var email = $("#email").val();
         var subject = $("#subject").val();
-        var obj = { myemail: email, mysubject: subject };
+        var doc;
+        var file = $('#fileUpload')[0].files[0];
+        //$.each($("#fileUpload"), function () {
+        //    doc = this.files;
+        //});
+        //var obj = { myemail: email, mysubject: subject, file:doc };
+
+        var formData = new FormData();
+        formData.append('myemail', email);
+        formData.append('mysubject', subject);
+        formData.append('myfile', $('input[type=file]')[0].files[0]);
         // alert(JSON.stringify(obj));
+        console.log(formData);
         $.ajax({
-            type: "Post",
-            url: "/Students/SendMailToUser",
-            data: JSON.stringify(obj),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            type: "post",
+            url: "/students/sendmailtouser",
+            contentType: false, 
+            processData: false,
+            data: formData,
+            ajaxStart: function () { $body.addClass("loading"); },
+            ajaxStop: function () { $body.removeClass("loading"); },
+         
+            datatype: "json",
 
             success: function (data) {
                 if (data != null) {
-                    alert("Email : " + data.myemail + ", Subject : " + data.subject);
+                    alert("email : " + data.email + ", subject : " + data.subject);
                 }
                 else {
-                    alert("Something went wrong");
+                    alert("something went wrong");
                 }
             },
             failure: function (data) {
-                alert(data.responseText);
+                alert(data.responsetext);
             },
             error: function (data) {
-                alert(data.responseText);
+                alert(data.responsetext);
             }
 
         });

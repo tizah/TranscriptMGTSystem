@@ -45,14 +45,15 @@ namespace TranscriptMGTSystem.Controllers
         }
 
         //this is the method that is used to send Transcript as an email to either a user or a school
-        public JsonResult SendMailToUser(string myemail, string mysubject)
+       // [HttpPost]
+        public JsonResult SendMailToUser(string myemail, string mysubject, HttpPostedFileBase myfile)
         {
             bool result = false;
-            result = SendEmail(myemail,mysubject,"this is transcript system from University of Lagos");
+            result = SendEmail(myemail,mysubject,"this is transcript system from University of Lagos",myfile);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public bool SendEmail(string toEmail, string subject, string body)
+        public bool SendEmail(string toEmail, string subject, string body, HttpPostedFileBase myfile)
         {
             try
             {
@@ -69,17 +70,36 @@ namespace TranscriptMGTSystem.Controllers
                 MailMessage mailMessage = new MailMessage(senderEmail, toEmail, subject, body);
                 mailMessage.IsBodyHtml = true;
                 mailMessage.BodyEncoding = UTF8Encoding.UTF8;
-         
+                if(myfile != null)
+                {
+                    mailMessage.Attachments.Add(new Attachment(myfile.InputStream, myfile.FileName));
+                }
+   
+                
              
                 client.Send(mailMessage);
                 return true;
             }
             catch(Exception e)
             {
-                return false;
+                    return false;
             }
         }
 
+        //the partial view for transcript 
+        public PartialViewResult TranscriptTemplate(int id)
+        {
+          
+            StudentTranscriptViewModel model = new StudentTranscriptViewModel
+            {
+                Student = db.Students.Where(x => x.StudentId.Equals((int)id)).FirstOrDefault(),
+                Courses = db.CourseGrades.Where(x => x.StudentId.Equals((int)id)).Include(x => x.Course)
+                                       .ToList(),
+                Cgpas = db.Results.Where(x => x.StudentId.Equals((int)id)).Include(x => x.CourseGrades).ToList()
+
+            };
+            return PartialView(model);
+        }
         public async Task<ActionResult> GetIndex(string search)
         {
             #region Server Side filtering
@@ -298,6 +318,7 @@ namespace TranscriptMGTSystem.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            TranscriptTemplate((int)id);
             StudentTranscriptViewModel model = new StudentTranscriptViewModel
             {
                 Student = db.Students.Where(x => x.StudentId.Equals((int)id)).FirstOrDefault(),
@@ -306,6 +327,7 @@ namespace TranscriptMGTSystem.Controllers
                 Cgpas = db.Results.Where(x => x.StudentId.Equals((int)id)).Include(x => x.CourseGrades).ToList()
 
             };
+          
 
             //.Include(x => x.Cgpas).Where(x => x.StudentId.Equals(id)).ToList();
             if (model == null)

@@ -7,13 +7,13 @@ namespace TranscriptMGTSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class CourserGrade : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CourserGrade));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807051231260_CourserGrade"; }
+            get { return "201807100930586_Initial"; }
         }
         
         string IMigrationMetadata.Source
